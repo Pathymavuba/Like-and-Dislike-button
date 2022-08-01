@@ -1,7 +1,9 @@
 import { useState } from "react"
 import Header from "./Component/Header";
 import Tasks from "./Component/Tasks";
+import AddTask from "./Component/AddTask";
 function App() {
+  const [showAddTask,setShowAddTask]=useState(false)
   const [tasks,setTasks]= useState(
     [
         {
@@ -24,6 +26,12 @@ function App() {
         },
     ]
 )
+//Add Task
+const  addTask = (task)=>{
+  const id = Math.floor(Math.random()*1000)+1
+  const newTask = {id,...task}
+  setTasks([...tasks,newTask])
+}
  //delete Task
 const deleteTask = (id)=>{
   setTasks(tasks.filter((task)=>task.id !== id))
@@ -39,7 +47,8 @@ const ToggleReminder = (id)=>{
  
 return (
     <div className="container">
-        <Header  />
+        <Header onAdd={()=>setShowAddTask(!showAddTask)} showAdd={showAddTask} />
+        {showAddTask && <AddTask  onAdd={addTask}/>}
         {tasks.length>0?(<Tasks tasks={tasks} onDelete={deleteTask} onToggle={ToggleReminder}/>):'No task to show'}
     </div>
     
