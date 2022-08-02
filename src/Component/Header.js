@@ -12,7 +12,7 @@ const Header = ({title,onAdd,showAdd}) => {
   )
 }
 Header.defaultProps = {
-    title:'Task Truck'
+    title:'Task Trucker'
 }
 Header.propTypes ={
     title: PropTypes.string,
